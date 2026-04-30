@@ -116,7 +116,7 @@ Status：Completed / Need Review
 | 角色定位 | 品質閘門檢查者 |
 | 核心任務 | 判斷 Writer Agent 的最終輸出是否可以交付使用者 |
 | 輸入 | Writer Agent 最終稿、前面所有 Agent 的 State |
-| 輸出 | Pass / Fail / Need Revision |
+| 輸出 | Pass / Fail / Need Revision，並附上具體 Evidence |
 | 不可做的事 | 不重寫全文，除非只做局部修正建議；不取代使用者最終決策 |
 | 交接對象 | 使用者，或退回指定 Agent |
 
@@ -128,11 +128,21 @@ Agent Name：Quality Agent
 Quality Result：Pass / Fail / Need Revision
 Failed Items：
 Reason：
+Evidence：
 Required Fix：
 Return To：
 Can Proceed：Yes / No
 Status：Completed
 ```
+
+### Evidence 欄位說明
+
+Evidence 必須指出 Quality Agent 判斷所依據的具體內容，例如：
+
+- 引用 Writer Agent 最終稿中的關鍵句子。
+- 指出缺少哪個必要欄位。
+- 指出違反哪一項 Quality Gate Checklist。
+- 指出哪個 Agent 的輸出造成流程無法交接。
 
 ---
 
@@ -142,4 +152,5 @@ Status：Completed
 2. 若資訊不足，Agent 應揭露缺口，不應自行隱性補完。
 3. 每個 Agent 的輸出都要能交接給下一位 Agent。
 4. Quality Agent 只做判斷，不替代 Writer Agent。
-5. 使用者保留最終決策權。
+5. Quality Agent 的判斷必須附上 Evidence，避免只有主觀評語。
+6. 使用者保留最終決策權。
