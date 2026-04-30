@@ -27,7 +27,9 @@ Notion State 用來記錄每次 Agent 執行步驟，不只是保存文件。建
 | 下一步 | Text | 必要 | 下一步應做什麼 |
 | Next Agent | Select | 必要 | 下一位接手 Agent |
 | Quality Result | Select | 必要 | Pass / Fail / Need Revision / Not Checked |
+| Evidence | Text | 必要 | 記錄 Quality Agent 判斷依據或關鍵證據 |
 | Return To Agent | Select | 建議 | 若未通過，應退回哪個 Agent |
+| Source Document Version | Text | 必要 | 記錄本次執行依據的 GitHub 規則文件版本、commit SHA 或 tag |
 | 是否需人工介入 | Checkbox | 建議 | 測試流程自動化程度 |
 | 人工介入原因 | Text | 建議 | 記錄人類介入的原因 |
 | 輸出是否可交接 | Select | 建議 | Yes / No / Partially |
@@ -55,12 +57,37 @@ Fail
 Need Revision
 ```
 
+## Evidence 欄位使用原則
+
+Evidence 用於保留判斷依據，特別是 Quality Agent 做出 Pass / Fail / Need Revision 時，應寫明依據。可包含：
+
+1. 引用前一手 Agent 的具體輸出片段。
+2. 指出缺少哪個必要欄位。
+3. 指出違反哪一項 Quality Gate Checklist。
+4. 指出流程交接失敗的具體原因。
+
+## Source Document Version 欄位使用原則
+
+Source Document Version 用於記錄本次測試依據的 GitHub 規則版本。建議填寫：
+
+```text
+GitHub commit SHA / tag / version note
+```
+
+例如：
+
+```text
+commit: 88c368e
+```
+
+這能避免未來規則文件更新後，無法判斷某次測試是依據哪一版規則執行。
+
 ## 範例
 
-| Task ID | Step ID | Agent | Status | Quality Result |
-|---|---:|---|---|---|
-| T001 | 1 | Router Agent | 完成 | Not Checked |
-| T001 | 2 | Content Agent | 完成 | Not Checked |
-| T001 | 3 | Reviewer Agent | 完成 | Not Checked |
-| T001 | 4 | Writer Agent | 完成 | Not Checked |
-| T001 | 5 | Quality Agent | 完成 | Pass |
+| Task ID | Step ID | Agent | Status | Quality Result | Source Document Version |
+|---|---:|---|---|---|---|
+| T001 | 1 | Router Agent | 完成 | Not Checked | commit: 88c368e |
+| T001 | 2 | Content Agent | 完成 | Not Checked | commit: 88c368e |
+| T001 | 3 | Reviewer Agent | 完成 | Not Checked | commit: 88c368e |
+| T001 | 4 | Writer Agent | 完成 | Not Checked | commit: 88c368e |
+| T001 | 5 | Quality Agent | 完成 | Pass | commit: 88c368e |
